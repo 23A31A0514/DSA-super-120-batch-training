@@ -1,0 +1,25 @@
+def hammingWeight(n: int) -> int:
+    count = 0
+    while n:
+        n &= (n - 1)  # Clears the rightmost set bit
+        count += 1
+    return count
+def missingNumber(nums: list[int]) -> int:
+    res = len(nums)
+    for i, num in enumerate(nums):
+        res ^= i ^ num  # XORing index and value
+    return res
+def isPowerOfTwo(n: int) -> bool:
+    # Power of two must be > 0 and have only one bit set
+    return n > 0 and (n & (n - 1)) == 0
+def singleNumber(nums: list[int]) -> int:
+    result = 0
+    for num in nums:
+        result ^= num  # Duplicates cancel out
+    return result
+def reverseBits(n: int) -> int:
+    result = 0
+    for i in range(32):
+        result = (result << 1) | (n & 1)
+        n >>= 1
+    return result
