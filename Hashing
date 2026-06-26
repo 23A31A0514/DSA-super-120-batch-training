@@ -1,0 +1,75 @@
+1. Two Sum (LeetCode 1)
+Problem:
+Given an array and a target, return indices of two numbers whose sum = target.
+Example:
+Input:
+nums = [2,7,11,15], target = 9
+Output:
+[0,1]
+Idea (HashMap)
+Store:
+number → index
+Check:
+target - current_number
+Code:
+def twoSum(nums, target):
+    hashmap = {}
+
+    for i in range(len(nums)):
+        diff = target - nums[i]
+
+        if diff in hashmap:
+            return [hashmap[diff], i]
+
+        hashmap[nums[i]] = i
+Time:
+O(n)
+2. Valid Anagram (LeetCode 242)
+Problem
+Check if two strings are anagrams.
+Example:
+s="listen"
+t="silent"
+Output:
+True
+Idea:
+Count frequency using hashing.
+Code:
+def isAnagram(s, t):
+    if len(s) != len(t):
+        return False
+    count = {}
+    for ch in s:
+        count[ch] = count.get(ch, 0) + 1
+    for ch in t:
+        if ch not in count:
+            return False
+        count[ch] -= 1
+        if count[ch] == 0:
+            del count[ch]
+    return len(count) == 0
+Time:
+O(n)
+3. Contains Duplicate (LeetCode 217)
+Problem:
+Return True if array contains duplicates.
+Example:
+nums=[1,2,3,1]
+Output:
+True
+Idea:
+Use HashSet.
+Code:
+def containsDuplicate(nums):
+    seen = set()
+    for num in nums:
+        if num in seen:
+            return True
+        seen.add(num)
+    return False
+Time:
+O(n)
+
+    return longest
+Time:
+O(n)
