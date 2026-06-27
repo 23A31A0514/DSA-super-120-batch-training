@@ -1,0 +1,56 @@
+1. Fruits into Baskets → Sliding Window (At most K distinct)
+
+Problem: You have fruits in trees, pick from a continuous range with at most 2 fruit types.
+
+Idea:
+
+Expand right pointer.
+Store fruit counts in hashmap.
+If distinct fruits > 2 → move left until valid.
+Track max window length.
+def totalFruit(fruits):
+    left = 0
+    count = {}
+    ans = 0
+
+    for right in range(len(fruits)):
+        count[fruits[right]] = count.get(fruits[right], 0) + 1
+
+        while len(count) > 2:
+            count[fruits[left]] -= 1
+            if count[fruits[left]] == 0:
+                del count[fruits[left]]
+            left += 1
+
+        ans = max(ans, right - left + 1)
+
+    return ans
+
+Time: O(n)
+
+2. Number of Substrings → Sliding Window Counting
+
+(Example: count substrings containing all characters 'a','b','c')
+
+Idea:
+
+Expand right.
+When condition satisfied:
+Every extension to right also works.
+Add (n - right) to answer.
+Shrink left.
+def numberOfSubstrings(s):
+    left = 0
+    count = {'a':0, 'b':0, 'c':0}
+    ans = 0
+    n = len(s)
+
+    for right in range(n):
+        count[s[right]] += 1
+
+        while all(count[ch] > 0 for ch in "abc"):
+            ans += n - right
+            count[s[left]] -= 1
+            left += 1
+
+    return ans
