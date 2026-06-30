@@ -1,0 +1,72 @@
+1) Jump Game (LC 55)
+Problem
+
+Given an array nums, each element tells the maximum jump length from that position.
+
+Return true if you can reach the last index.
+
+Example
+nums = [2,3,1,1,4]
+
+0 → jump 1 step
+1 → jump 3 steps
+Reach end
+
+Output: true
+Greedy Idea
+
+Track the farthest index reachable.
+
+If current index becomes greater than farthest → impossible.
+
+Dry Run
+nums=[2,3,1,1,4]
+
+i=0 far=2
+i=1 far=max(2,1+3)=4
+i=2 far=4
+Reached end
+
+Complexity
+Time: O(n)
+Space: O(1)
+2) Jump Game II (LC 45)
+Problem
+
+Return the minimum jumps needed to reach last index.
+
+Example
+nums=[2,3,1,1,4]
+
+0 → 1 → 4
+
+Answer = 2
+Greedy Idea
+
+Treat reachable positions like levels.
+
+Maintain:
+
+far → farthest reachable
+end → current jump boundary
+jump → count
+
+When index reaches end, make another jump.
+
+Dry Run
+nums=[2,3,1,1,4]
+
+i=0
+far=2
+end=0 → jump=1
+
+i=1
+far=4
+
+i=2
+end=2 → jump=2
+
+
+Complexity
+Time: O(n)
+Space: O(1)
