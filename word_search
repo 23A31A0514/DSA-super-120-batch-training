@@ -1,0 +1,44 @@
+import collections
+
+class Solution:
+    def findWords(self, board: list[list[str]], words: list[str]) -> list[str]:
+        # 1. Build the Trie
+        root = {}
+        for word in words:
+            node = root
+            for char in word:
+                node = node.setdefault(char, {})
+            node['#'] = word  # Mark the end of a word
+
+        rows, cols = len(board), len(board[0])
+        result = set()
+
+        # 2. DFS function
+        def dfs(r, c, node):
+            char = board[r][c]
+            if char not in node:
+                return
+            
+            node = node[char]
+            if '#' in node:
+                result.add(node['#'])
+            
+            # Temporarily mark as visited
+            board[r][c] = '#'
+            
+            # Explore neighbors
+            for dr, dc in [(0, 1), (0, -1), (1, 0), (-1, 0)]:
+                nr, nc = r + dr, c + dc
+                if 0 <= nr < rows and 0 <= nc < cols and board[nr][nc] != '#':
+                    dfs(nr, nc, node)
+            
+            # Backtrack
+            board[r][c] = char
+
+        # 3. Start DFS from each cell
+        for r in range(rows):
+            for c in range(cols):
+                if board[r][c] in root:
+                    dfs(r, c, root)
+        
+        return list(result)
